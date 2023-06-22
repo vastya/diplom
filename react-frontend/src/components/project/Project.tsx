@@ -30,7 +30,7 @@ const Project = () => {
     );
   }
 
-  const selectedIssues = !!Object.keys(searchedIssues || {}).length ? searchedIssues : issues
+  const selectedIssues = searchedIssues && !!Object.keys(searchedIssues || {}).length ? searchedIssues : issues
 
   return (
     <div className='mt-6 flex grow flex-col px-8 sm:px-10'>

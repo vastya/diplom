@@ -58,7 +58,7 @@ const Board = (props: Props) => {
             <List
               key={props.id}
               idx={i}
-              issues={issues[props.id]}
+              issues={issues && issues[props.id]} // Check if issues exist before accessing them
               isDragDisabled={isDragDisabled}
               {...props}
             />
