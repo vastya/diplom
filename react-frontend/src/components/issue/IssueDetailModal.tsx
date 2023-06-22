@@ -108,7 +108,7 @@ const IssueDetailModal = (props: IssueModalProps) => {
                 <div className='rounded-sm bg-[#f4f5f7] px-4 py-[5px] sm:w-fit'>
                   <Item
                     {...reporter}
-                    text={reporter.text + (isMine ? ' (you)' : '')}
+                    text={reporter?.text + (isMine ? ' (you)' : '')}
                     size='h-6 w-6'
                     variant='ROUND'
                   />
