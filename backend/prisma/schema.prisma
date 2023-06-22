@@ -1,0 +1,100 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+  binaryTargets = ["native"]
+}
+
+datasource db {
+  provider             = "postgresql"
+  url                  = "postgresql://postgres:postgres@localhost:5432/jira_development"
+  referentialIntegrity = "prisma"
+}
+
+model Users {
+  id           Int        @id @default(autoincrement())
+  email        String
+  username     String
+  pwd          String
+  profileUrl   String     @default("")
+  lastLoggedIn DateTime   @default(now())
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  members      Members[]
+  assignees    Assignees[]
+  projects     Projects[]
+  comments     Comments[]
+  issues       Issues[]
+}
+
+model Projects {
+  id        Int        @id @default(autoincrement())
+  name      String     @db.VarChar(50)
+  descr     String?    @db.VarChar(200)
+  repo      String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  Users      Users?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  lists     Lists[]
+  members   Members[]
+  assignees Assignees[]
+}
+
+model Members {
+  id        Int      @id @default(autoincrement())
+  isAdmin   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  Projects  Projects? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId Int
+  Users     Users?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+}
+
+model Lists {
+  id        Int      @id @default(autoincrement())
+  name      String   @default("unnamed list")
+  order     Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  issues    Issues[]
+  Projects   Projects? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId Int
+}
+
+model Issues {
+  id         Int        @id @default(autoincrement())
+  order      Int
+  priority   Int
+  type       Int
+  summary    String     @db.VarChar(100)
+  descr      String?    @db.VarChar(500)
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  Lists       Lists?      @relation(fields: [listId], references: [id], onDelete: Cascade)
+  listId     Int
+  Users       Users?      @relation(fields: [reporterId], references: [id], onDelete: Cascade)
+  reporterId Int
+  comments   Comments[]
+  assignees  Assignees[]
+}
+
+model Assignees {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  Users      Users?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  Issues     Issues?   @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  issueId   Int
+  Projects   Projects? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId Int
+}
+
+model Comments {
+  id        Int      @id @default(autoincrement())
+  descr     String   @db.VarChar(200)
+  createdAt DateTime @default(now())
+  Issues     Issues?   @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  issueId   Int
+  Users      Users?    @relation(fields: [userId], references: [id])
+  userId    Int
+}
