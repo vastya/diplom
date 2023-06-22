@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 const axiosDf = axios.create({
-  // baseURL: 'https://jira-clone.onrender.com/',
-  baseURL: 'http://localhost:5001/',
+  baseURL: 'https://f467-37-215-177-245.ngrok-free.app/',
   withCredentials: true,
 });
 
