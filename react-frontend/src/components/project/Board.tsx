@@ -11,7 +11,7 @@ import toast from 'react-hot-toast';
 
 interface Props {
   lists: ApiList[];
-  issues?: Issues | undefined | [];
+  issues?: any;
   isDragDisabled: boolean;
 }
 
@@ -33,7 +33,7 @@ const Board = (props: Props) => {
           projectId,
         })
       : reorderIssues({
-          id: !!issues?.length ? issues[parseId(s)][s.index].id : null,
+          id: issues[parseId(s)][s.index].id,
           s: { sId: parseId(s), order: s.index + 1 }, // change index to actual order
           d: { dId: parseId(d), newOrder: d.index + 1 }, // change index to actual order
           projectId,
@@ -58,7 +58,7 @@ const Board = (props: Props) => {
             <List
               key={props.id}
               idx={i}
-              issues={issues?.[props.id]}
+              issues={issues[props.id]}
               isDragDisabled={isDragDisabled}
               {...props}
             />

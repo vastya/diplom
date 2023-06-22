@@ -30,13 +30,15 @@ const Project = () => {
     );
   }
 
+  const selectedIssues = !!Object.keys(searchedIssues || {}).length ? searchedIssues : issues
+
   return (
     <div className='mt-6 flex grow flex-col px-8 sm:px-10'>
       <h1 className='mb-4 text-xl font-semibold text-c-text'>Kanban Board</h1>
       <Filter setIssues={setIssues} isEmpty={lists?.length === 0} {...{ projectId, setIsDragDisabled }} />
 
       {lists ? (
-        <Board {...{ lists, issues: !!Object.keys(searchedIssues || {}).length ? searchedIssues : issues, isDragDisabled }} />
+        <Board {...{ lists, issues: selectedIssues, isDragDisabled }} />
       ) : (
         <div className='grid h-[40vh] w-full place-items-center'>
           <SS />

@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react';
 import {ChangeEvent, useState} from 'react';
 import { Navigate } from 'react-router-dom';
-import {APIERROR} from '../../api/apiTypes';
+import {APIERROR, Project} from '../../api/apiTypes';
 import { selectAuthUser } from '../../api/endpoints/auth.endpoint';
 import { useProjectsQuery } from '../../api/endpoints/project.endpoint';
 import SS from '../util/SpinningCircle';
@@ -18,7 +18,7 @@ const ProjectCatalog = () => {
   } = useProjectsQuery(authUser?.id as number, { skip: !authUser });
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
-  const [searchedProjects, setProjects] = useState<[]>([]);
+  const [searchedProjects, setProjects] = useState< Project[] | undefined>([]);
   const [loading, setLoading] = useState(false);
 
   let unsubscribe: ReturnType<typeof setTimeout>;

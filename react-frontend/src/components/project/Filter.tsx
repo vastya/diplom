@@ -36,7 +36,7 @@ function Filter(props: Props) {
   let unsubscribe: ReturnType<typeof setTimeout>;
 
   const searchIssue = async (q: string) => {
-    const result = await axiosDf.get(`api/issue/search?userId=${u.id}&projectId=${projectId}&q=` + q);
+    const result = await axiosDf.get(`api/issue/search?userId=${u?.id}&projectId=${projectId}&q=` + q);
     return result.data;
   };
 
