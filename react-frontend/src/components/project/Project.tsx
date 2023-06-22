@@ -14,6 +14,7 @@ const Project = () => {
   const { data: lists, error: listError } = useListsQuery(projectId);
   const [isDragDisabled, setIsDragDisabled] = useState(false);
   const [searchedIssues, setIssues] = useState<{}>([]);
+  const [useSearch, setUseSearch] = useState<boolean>(false);
 
   const { data: issues, error: issueError } = useIssuesQuery(
     { projectId, ...issueQuery },
@@ -30,12 +31,12 @@ const Project = () => {
     );
   }
 
-  const selectedIssues = searchedIssues && !!Object.keys(searchedIssues || {}).length ? searchedIssues : issues
+  const selectedIssues = useSearch ? searchedIssues && !!Object.keys(searchedIssues || {}).length ? searchedIssues : issues : issues;
 
   return (
     <div className='mt-6 flex grow flex-col px-8 sm:px-10'>
       <h1 className='mb-4 text-xl font-semibold text-c-text'>Kanban Board</h1>
-      <Filter setIssues={setIssues} isEmpty={lists?.length === 0} {...{ projectId, setIsDragDisabled }} />
+      <Filter setIssues={setIssues} setUseSearch={setUseSearch} isEmpty={lists?.length === 0} {...{ projectId, setIsDragDisabled }} />
 
       {lists ? (
         <Board {...{ lists, issues: selectedIssues, isDragDisabled }} />

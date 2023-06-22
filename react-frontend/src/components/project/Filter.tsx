@@ -1,4 +1,4 @@
-import {ChangeEvent, Dispatch, lazy, SetStateAction, Suspense as S, useState} from 'react';
+import {ChangeEvent, Dispatch, lazy, SetStateAction, Suspense as S, useEffect, useState} from 'react';
 import { APIERROR } from '../../api/apiTypes';
 import { Navigate } from 'react-router-dom';
 import { Icon } from '@iconify/react';
@@ -18,6 +18,7 @@ interface Props {
   projectId: number;
   isEmpty: boolean;
   setIssues: (value: []) => void;
+  setUseSearch: (value: boolean) => void;
 }
 
 function Filter(props: Props) {
@@ -39,6 +40,10 @@ function Filter(props: Props) {
     const result = await axiosDf.get(`api/issue/search?userId=${u?.id}&projectId=${projectId}&q=` + q);
     return result.data;
   };
+
+  useEffect(() => {
+    props.setUseSearch(!!input.length);
+  }, [input])
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     clearTimeout(unsubscribe);
