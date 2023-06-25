@@ -59,9 +59,9 @@ const ProjectCatalog = () => {
   return (
     <>
       <div className='z-10 h-screen min-h-fit grow overflow-auto bg-c-1 px-10 pb-10 pt-12 text-c-5'>
-        <div className='flex min-w-[43rem] justify-between'>
+        <div className='flex justify-between flex-col gap-4 md:flex-row md:gap-0'>
           <span className='text-2xl font-semibold tracking-wide'>Projects</span>
-          <button onClick={() => setIsOpen(true)} className='btn'>
+          <button onClick={() => setIsOpen(true)} className='btn max-w-[140px]'>
             Create Project
           </button>
         </div>
@@ -84,8 +84,8 @@ const ProjectCatalog = () => {
           <div className='mt-4 flex py-1 text-sm font-semibold'>
             <div className='w-8 shrink-0'></div>
             <div className='min-w-[10rem] grow px-2'>Name</div>
-            <div className='min-w-[18rem] grow px-2'>Description</div>
-            <div className='w-52 shrink-0 px-2'>Lead</div>
+            <div className='min-w-[18rem] grow px-2 hidden md:block'>Description</div>
+            <div className='w-52 shrink-0 px-2 hidden md:block'>Lead</div>
           </div>
           {!projects?.length && !input.length &&
             <div className='mt-[30vh] grid place-items-center text-xl'>

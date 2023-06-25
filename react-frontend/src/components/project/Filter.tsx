@@ -68,7 +68,7 @@ function Filter(props: Props) {
   };
 
   return (
-    <div className='mb-8 flex min-w-fit items-center text-c-5'>
+    <div className='mb-8 flex min-w-fit items-start lg:items-center text-c-5 flex-col gap-4 md:flex-row md:flex-wrap lg:gap-0'>
       <div className='relative'>
         <input
           value={input}

@@ -46,11 +46,11 @@ const Board = (props: Props) => {
   };
 
   return (
-    <div className='mb-5 flex min-w-max grow items-start'>
+    <div className='mb-5 flex min-w-max grow items-start flex-col gap-4 md:flex-row'>
       <DragDropContext onDragEnd={onDragEnd}>
         <DroppableWrapper
           type='list'
-          className='flex items-start'
+          className='flex items-start flex-col gap-4 lg:flex-row'
           droppableId='board-central'
           direction='horizontal'
         >

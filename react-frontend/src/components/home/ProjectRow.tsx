@@ -36,15 +36,15 @@ const ProjectRow = (props: Props) => {
       >
         <div className='w-8 shrink-0 text-center'>{idx + 1}</div>
         <div className='min-w-[10rem] grow px-2'>{name}</div>
-        <div className='min-w-[18rem] grow px-2'>{descr}</div>
-        <div className='w-52 shrink-0 px-2'>
+        <div className='min-w-[18rem] grow px-2 hidden md:block'>{descr}</div>
+        <div className='w-52 shrink-0 px-2 hidden md:block'>
           {publicUser?.username}
           {isAdmin ? <span className='ml-1 text-sm font-bold'>(you)</span> : ''}
         </div>
         <button
           title='Delete or Leave'
           onClick={handleDelete}
-          className='btn-icon absolute right-0 ml-5 bg-c-1 group-hover:block sm:hidden'
+          className='btn-icon absolute right-0 ml-5 bg-c-1 group-hover:block'
         >
           <Icon icon='bx:trash' className='text-red-500' />
         </button>
