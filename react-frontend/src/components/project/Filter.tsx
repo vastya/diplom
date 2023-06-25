@@ -68,7 +68,7 @@ function Filter(props: Props) {
   };
 
   return (
-    <div className='mb-8 flex min-w-fit items-start lg:items-center text-c-5 flex-col gap-4 md:flex-row md:flex-wrap lg:gap-0'>
+    <div className='mb-8 flex min-w-fit items-start lg:items-center text-c-5 flex-col gap-4 lg:flex-row lg:gap-0'>
       <div className='relative'>
         <input
           value={input}
@@ -113,7 +113,7 @@ function Filter(props: Props) {
       )}
       {uid && (
         <>
-          <div className='pb-[2px]'>|</div>
+          <div className='pb-[2px] hidden lg:flex'>|</div>
           <button className='btn-crystal shrink-0' onClick={handleSetQuery({})}>
             Clear all
           </button>
